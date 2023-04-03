@@ -1,8 +1,9 @@
+import { Component } from "react";
+import { Card, ListGroup, Spinner, Button } from 'react-bootstrap';
+
 class CommentArea extends Component {
     state = {
-        comments: null,
-        rate: "string",
-        elementId: "string",
+        comments: [],
     };
 
     componentDidMount = () => {
@@ -12,16 +13,16 @@ class CommentArea extends Component {
 
     fetchComments = async () => {
         try {
-            let r = await fetch(
-                fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+            let response = await fetch(
+                fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin, {
                     headers: {
                         Authorization:
-                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzYTFiMmM1NmIzNjAwMTMzZmU1NjIiLCJpYXQiOjE2ODA1Mjg3MzcsImV4cCI6MTY4MTczODMzN30.sHHlixTcdHIl7BrNiR9t_ezPjUp-OvEl85QevDIqLW4",
+                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzYTFiMmM1NmIzNjAwMTMzZmU1NjIiLCJpYXQiOjE2ODA1Mjg3MzcsImV4cCI6MTY4MTczODMzN30.  sHHlixTcdHIl7BrNiR9t_ezPjUp-OvEl85QevDIqLW4",
                     },
                 })
             );
-            if (r.ok) {
-                let posts = await r.json();
+            if (response.ok) {
+                let posts = await response.json();
                 this.setState({ comments: posts });
                 console.log("setState() avvenuto");
             }
@@ -29,7 +30,7 @@ class CommentArea extends Component {
             console.log(error);
         }
     };
-    
+
     render() {
         return (
             <>
