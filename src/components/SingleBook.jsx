@@ -18,8 +18,8 @@ class SingleBook extends Component {
                         <Card.Title>{this.props.book.title}</Card.Title>
                         <Badge pill bg="dark">{this.props.book.price}</Badge>
                     </Card.Body>
-                    {this.state.selected && <CommentArea bookId={book.asin}/>}
                 </Card>
+                    {this.state.selected && <CommentArea bookId={this.props.book.asin}/>}
             </Col>
         )
     }
